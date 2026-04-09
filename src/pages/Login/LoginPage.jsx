@@ -39,7 +39,7 @@ export default function LoginPage() {
         <CardContent sx={{ p: 4 }}>
           <Box sx={{ textAlign: 'center', mb: 3 }}>
             <Inventory2 sx={{ fontSize: 48, color: 'primary.main', mb: 1 }} />
-            <Typography variant="h5" gutterBottom>Distrireouestos J Marod</Typography>
+            <Typography variant="h5" gutterBottom>Distrirepuestos J Marod</Typography>
             <Typography variant="body2" color="text.secondary">Sistema de Inventario</Typography>
           </Box>
 

@@ -22,7 +22,7 @@ export default function TopBar({ height, sidebarWidth }) {
         <Inventory2 sx={{ mr: 1.5, fontSize: 28 }} />
         <Box sx={{ flexGrow: 1 }}>
           <Typography variant="h6" noWrap sx={{ color: 'white', lineHeight: 1.2 }}>
-            Distrireouestos J Marod
+            Distrirepuestos J Marod
           </Typography>
           <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.75)', lineHeight: 1 }}>
             Sistema de Inventario
