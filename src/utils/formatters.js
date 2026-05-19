@@ -7,18 +7,26 @@ export function formatCurrency(value) {
   }).format(value);
 }
 
-export function formatDate(dateString) {
-  if (!dateString) return '—';
-  return new Date(dateString).toLocaleDateString('es-CO', {
-    year: 'numeric',
-    month: 'short',
-    day: '2-digit',
-  });
-}
+export function formatDateTime(dateValue) {
+  if (!dateValue) return '—';
 
-export function formatDateTime(dateString) {
-  if (!dateString) return '—';
-  return new Date(dateString).toLocaleString('es-CO', {
+  let date;
+  if (Array.isArray(dateValue)) {
+    // Jackson puede serializar LocalDateTime como array [year, month, day, h, m, s, nano]
+    const [y, mo, d, h = 0, mi = 0, s = 0] = dateValue;
+    date = new Date(y, mo - 1, d, h, mi, s);
+  } else {
+    // String ISO: truncar fracciones de segundo a 3 dígitos (JS solo soporta ms)
+    // y agregar 'Z' solo si no tiene info de zona horaria
+    const str = String(dateValue).replace(/(\.\d{3})\d+/, '$1');
+    const hasOffset = str.endsWith('Z') || /[+-]\d{2}:\d{2}$/.test(str);
+    date = new Date(hasOffset ? str : str + 'Z');
+  }
+
+  if (isNaN(date.getTime())) return '—';
+
+  return date.toLocaleString('es-CO', {
+    timeZone: 'America/Bogota',
     year: 'numeric',
     month: 'short',
     day: '2-digit',

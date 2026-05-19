@@ -79,27 +79,42 @@ export default function SaleListPage() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {data.content.map(s => (
-                  <TableRow key={s.id} hover>
-                    <TableCell>{s.id}</TableCell>
-                    <TableCell>{formatDateTime(s.saleDate)}</TableCell>
-                    <TableCell>{s.items?.length ?? 0}</TableCell>
-                    <TableCell align="right">{formatCurrency(s.totalAmount)}</TableCell>
-                    <TableCell sx={{ color: 'text.secondary', maxWidth: 180 }}>{s.notes || '—'}</TableCell>
-                    <TableCell align="center">
-                      <Tooltip title="Ver detalle">
-                        <IconButton size="small" onClick={() => navigate(`/sales/${s.id}`)}><Visibility fontSize="small" /></IconButton>
-                      </Tooltip>
-                      <Tooltip title="Cancelar venta">
-                        <IconButton size="small" color="error" onClick={() => setCancelTarget(s)}><Cancel fontSize="small" /></IconButton>
-                      </Tooltip>
-                    </TableCell>
-                  </TableRow>
-                ))}
-                {!data.content.length && (
-                  <TableRow><TableCell colSpan={6} align="center" sx={{ py: 4, color: 'text.secondary' }}>No hay ventas registradas</TableCell></TableRow>
-                )}
-              </TableBody>
+  {data.content.map(s => {
+    console.log("FECHA REAL:", s.saleDate, typeof s.saleDate);
+
+    return (
+      <TableRow key={s.id} hover>
+        <TableCell>{s.id}</TableCell>
+        <TableCell>{formatDateTime(s.saleDate)}</TableCell>
+        <TableCell>{s.items?.length ?? 0}</TableCell>
+        <TableCell align="right">{formatCurrency(s.totalAmount)}</TableCell>
+        <TableCell sx={{ color: 'text.secondary', maxWidth: 180 }}>
+          {s.notes || '—'}
+        </TableCell>
+        <TableCell align="center">
+          <Tooltip title="Ver detalle">
+            <IconButton size="small" onClick={() => navigate(`/sales/${s.id}`)}>
+              <Visibility fontSize="small" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Cancelar venta">
+            <IconButton size="small" color="error" onClick={() => setCancelTarget(s)}>
+              <Cancel fontSize="small" />
+            </IconButton>
+          </Tooltip>
+        </TableCell>
+      </TableRow>
+    );
+  })}
+
+  {!data.content.length && (
+    <TableRow>
+      <TableCell colSpan={6} align="center" sx={{ py: 4, color: 'text.secondary' }}>
+        No hay ventas registradas
+      </TableCell>
+    </TableRow>
+  )}
+</TableBody>
             </Table>
             <TablePagination component="div" count={data.totalElements} page={page} rowsPerPage={20}
               onPageChange={(_, p) => setPage(p)} rowsPerPageOptions={[20]}

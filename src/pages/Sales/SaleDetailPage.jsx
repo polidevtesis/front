@@ -17,12 +17,21 @@ export default function SaleDetailPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError]   = useState('');
 
-  useEffect(() => {
+  /*useEffect(() => {
     saleApi.getById(id)
       .then(setSale)
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
-  }, [id]);
+  }, [id]);*/
+  useEffect(() => {
+  saleApi.getById(id)
+    .then(data => {
+      console.log("SALE COMPLETA:", data); // 👈 AQUÍ
+      setSale(data);
+    })
+    .catch(err => setError(err.message))
+    .finally(() => setLoading(false));
+}, [id]);
 
   if (loading) return <LoadingOverlay />;
   if (error)   return <Alert severity="error">{error}</Alert>;
