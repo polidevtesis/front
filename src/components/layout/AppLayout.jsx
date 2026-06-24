@@ -17,8 +17,9 @@ export default function AppLayout() {
           sx={{
             flexGrow: 1,
             mt: `${TOPBAR_HEIGHT}px`,
-            ml: `${SIDEBAR_WIDTH}px`,
-            p: 3,
+            py: 3,
+            px: 2,
+            minWidth: 0,
             backgroundColor: 'background.default',
           }}
         >

@@ -68,7 +68,7 @@ export default function AiOrderPage() {
 
       <Grid container spacing={3}>
         {/* Parameters panel */}
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={3}>
           <Card>
             <CardContent>
               <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -104,7 +104,7 @@ export default function AiOrderPage() {
                 />
 
                 <Alert severity="info" icon={<Lock fontSize="small" />} sx={{ mt: 1 }}>
-                  Se te pedirá tu <strong>API key de Anthropic</strong> antes de ejecutar. La clave se usa solo para esta solicitud y nunca se almacena.
+                  Se te pedirá tu <strong>API key de OpenAI</strong> antes de ejecutar. La clave se usa solo para esta solicitud y nunca se almacena.
                 </Alert>
 
                 <Button
@@ -123,7 +123,7 @@ export default function AiOrderPage() {
         </Grid>
 
         {/* Results panel */}
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={9}>
           {loading && (
             <Card>
               <CardContent sx={{ textAlign: 'center', py: 6 }}>
@@ -234,12 +234,12 @@ export default function AiOrderPage() {
       {/* API Key dialog — secure, modal, key cleared on close */}
       <Dialog open={apiKeyDialog} onClose={() => { setApiKeyDialog(false); setApiKeyInput(''); }} maxWidth="sm" fullWidth>
         <DialogTitle sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <Lock color="primary" /> Ingresa tu API key de Anthropic
+          <Lock color="primary" /> Ingresa tu API key de OpenAI
         </DialogTitle>
         <DialogContent>
           <DialogContentText sx={{ mb: 2 }}>
             Esta clave se usará <strong>únicamente</strong> para esta solicitud y no se guardará en ningún lugar.
-            Puedes obtenerla en <strong>console.anthropic.com</strong>.
+            Puedes obtenerla en <strong>platform.openai.com/api-keys</strong>.
           </DialogContentText>
           <TextField
             autoFocus
@@ -248,7 +248,7 @@ export default function AiOrderPage() {
             type="password"
             value={apiKeyInput}
             onChange={e => setApiKeyInput(e.target.value)}
-            placeholder="sk-ant-..."
+            placeholder="sk-..."
             onKeyDown={e => { if (e.key === 'Enter') handleConfirmWithKey(); }}
           />
         </DialogContent>
